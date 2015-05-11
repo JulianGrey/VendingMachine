@@ -19,8 +19,6 @@ class Drink {
 		name = n;
 		price = p;
 		stock = s;
-
-		// The drink also needs to be added to a list
 		setId(v);
 	}
 
