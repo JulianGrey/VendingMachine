@@ -71,8 +71,10 @@ void addDrink(std::vector<Drink>* v) {
 		(*v).push_back(drink);
 	}
 
-	delete sInput;
+	delete found;
 	delete nInput;
+	delete qInput;
+	delete sInput;
 }
 
 void addStock(std::vector<Drink>* v) {
