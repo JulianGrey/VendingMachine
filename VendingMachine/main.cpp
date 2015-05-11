@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-void admin(std::vector<Drink>* v, bool* b);
+void admin(std::vector<Drink>* v, bool* b); // Holds admin functions
 std::vector<Drink>* loadData(std::vector<Drink>* v); // Load stock from file
 void saveData(std::vector<Drink>* v); // Save stock to file
 
