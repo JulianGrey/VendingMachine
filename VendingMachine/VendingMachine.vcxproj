@@ -64,7 +64,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="addDrink.cpp" />
     <ClCompile Include="admin.cpp" />
     <ClCompile Include="files.cpp" />
     <ClCompile Include="main.cpp" />
