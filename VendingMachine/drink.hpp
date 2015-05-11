@@ -35,7 +35,7 @@ class Drink {
 		else {
 			std::cout << "Operation cannot be performed: ";
 			if(stock == 0) {
-				std::cout << "Drink is out of stock\n";
+				std::cout << "Drink is out of stock\n\n";
 			}
 			else {
 				std::cout << "Insufficient stock (stock remaining: " << stock << ")\n\n";
