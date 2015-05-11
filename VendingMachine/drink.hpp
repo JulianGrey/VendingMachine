@@ -1,5 +1,8 @@
+#ifndef __DRINK_HPP_INCLUDED__
+#define __DRINK_HPP_INCLUDED__
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Drink {
   public:
@@ -8,11 +11,17 @@ class Drink {
 	int id;
 	int stock;
 
-	Drink(std::string n, double p) {
+	void setId(std::vector<Drink>* v) {
+		this->id = (*v).size() + 1;
+	}
+	
+	Drink(std::string n, double p, int s, std::vector<Drink>* v) {
 		name = n;
 		price = p;
+		stock = s;
 
 		// The drink also needs to be added to a list
+		setId(v);
 	}
 
 	void addStock(int q) {
@@ -34,3 +43,5 @@ class Drink {
 		}
 	}
 };
+
+#endif
