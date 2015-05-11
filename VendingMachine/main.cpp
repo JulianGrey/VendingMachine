@@ -26,7 +26,7 @@ int main() {
 				std::cout << " (selection: " << (*vDrink)[i].id << ")\n";
 			}
 		}
-		std::cout << "Admin (selection: -1)\n";
+		std::cout << "\nAdmin (selection: -1)\n";
 		std::cout << "Quit (selection: 0)\n\n";
 		std::cin >> *selection;
 		std::cin.ignore();
