@@ -43,7 +43,7 @@ void admin(std::vector<Drink>* v, bool* b) {
 
 void addDrink(std::vector<Drink>* v) {
 	std::string* sInput = new std::string;
-	double* nInput = new double;
+	double* pInput = new double;
 	int* qInput = new int;
 	bool* found = new bool;
 
@@ -59,20 +59,29 @@ void addDrink(std::vector<Drink>* v) {
 	}
 
 	if(*found) {
-		std::cout << "\nThis product has already been added\n\n";
+		std::cout << "\nThis product has already been added\n";
 	}
 	else {
 		std::cout << "Enter the price of the new drink: ";
-		std::cin >> *nInput;
+		std::cin >> *pInput;
 		std::cout << "Enter the quantity of this drink being added: ";
 		std::cin >> *qInput;
 
-		Drink drink(*sInput, *nInput, *qInput, v);
-		(*v).push_back(drink);
+		if(*qInput < 0) {
+			std::cout << "Cannot add a negative number of stock!\n";
+		}
+		else if(*pInput < 0.00) {
+			std::cout << "Cannot have a negative price!\n";
+		}
+		else {
+			Drink drink(*sInput, *pInput, *qInput, v);
+			(*v).push_back(drink);
+		}
 	}
+	std::cout << '\n';
 
 	delete found;
-	delete nInput;
+	delete pInput;
 	delete qInput;
 	delete sInput;
 }
@@ -94,21 +103,25 @@ void addStock(std::vector<Drink>* v) {
 	std::cin.ignore();
 	if(*selection != 0) {
 		std::cout << '\n';
-		std::cout << "How many items do you want to add?";
+		std::cout << "How many items do you want to add? ";
 		std::cin >> *quantity;
 		std::cin.ignore();
-
-		for(size_t i = 0; i < (*v).size(); i++) {
-			if((*v)[i].id == *selection) {
-				*itemCheck = true;
-				(*v)[i].addStock(*quantity);
-				std::cout << *quantity << " items have been added to drink " << (*v)[i].name;
-				std::cout << "\n";
-				break;
-			}
+		if(*quantity < 1) {
+			std::cout << "Cannot add a negative or 0 number of stock!\n";
 		}
-		if(!(*itemCheck)) {
-			std::cout << "Item ID does not exist.\n";
+		else {
+			for(size_t i = 0; i < (*v).size(); i++) {
+				if((*v)[i].id == *selection) {
+					*itemCheck = true;
+					(*v)[i].addStock(*quantity);
+					std::cout << *quantity << " items have been added to drink " << (*v)[i].name;
+					std::cout << "\n";
+					break;
+				}
+			}
+			if(!(*itemCheck)) {
+				std::cout << "Item ID does not exist.\n";
+			}
 		}
 	}
 	std::cout << '\n';
