@@ -10,14 +10,14 @@ void saveData(std::vector<Drink>* v); // Save stock to file
 int main() {
 	std::vector<Drink>* vDrink = new std::vector<Drink>;
 	loadData(vDrink);
-	bool* bAdmin = new bool;
-	*bAdmin = false;
-	bool* quit = new bool;
-	*quit = false;
-	bool* found = new bool;
-	int* selection = new int;
+	bool bAdmin, bFound, bQuit;
+	bAdmin = bFound = bQuit = false;
+	int selection;
+	bool* bPtr;
+	int* iPtr;
+	iPtr = &selection;
 
-	while(!(*quit)) {
+	while(!bQuit) {
 		std::cout << "Welcome. What drink would you like to buy?\n\n";
 		for(size_t i = 0; i < (*vDrink).size(); i++) {
 			// Get a list of drinks which are in stock
@@ -28,23 +28,26 @@ int main() {
 		}
 		std::cout << "\nAdmin (selection: -1)\n";
 		std::cout << "Quit (selection: 0)\n\n";
-		std::cin >> *selection;
+		std::cin >> *iPtr;
 		std::cin.ignore();
 
-		switch(*selection) {
+		switch(selection) {
 			case 0:
-				*quit = true;
+				bPtr = &bQuit;
+				*bPtr = true;
 				break;
 			case -1:
-				*bAdmin = true;
-				admin(vDrink, bAdmin);
+				bPtr = &bAdmin;
+				*bPtr = true;
+				admin(vDrink, bPtr);
 				break;
 		}
 
-		*found = false;
+		bPtr = &bFound;
+		*bPtr = false;
 		for(size_t i = 0; i < (*vDrink).size(); i++) {
-			if((*vDrink)[i].id == *selection) {
-				*found = true;
+			if((*vDrink)[i].id == selection) {
+				*bPtr = true;
 				if((*vDrink)[i].stock > 0) {
 					std::cout << (*vDrink)[i].name << " dispensed. Enjoy your drink.\n\n";
 				}
@@ -52,7 +55,7 @@ int main() {
 				break;
 			}
 		}
-		if(!(*found) && !(*quit)) {
+		if(!bFound && !bQuit) {
 			// Drink ID doesn't exist
 			std::cout << "Invalid selection.\n";
 		}
@@ -61,10 +64,6 @@ int main() {
 
 	saveData(vDrink); // Save changes to stock
 
-	delete bAdmin;
-	delete found;
-	delete selection;
-	delete quit;
 	delete vDrink;
 	return 0;
 }
