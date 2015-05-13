@@ -31,7 +31,7 @@ void admin(std::vector<Drink>* v, bool* b) {
 				}
 				break;
 			case 0:
-				*b= false;
+				*b = false;
 				continue;
 			default:
 				std::cout << "Invalid selection\n\n";
